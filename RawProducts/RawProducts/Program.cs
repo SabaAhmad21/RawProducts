@@ -1,7 +1,15 @@
+using Microsoft.EntityFrameworkCore;
+using RawProducts.Infrastructure.Interfaces;
+using RawProducts.Models;
+using System.Configuration;
+using RawProducts.Infrastructure.Implementation;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<RawProductContext>(options => options.UseSqlServer("Server=DESKTOP-MPQVSOQ\\SQLEXPRESS;Database=RawProduct;Trusted_Connection=True;"));
+
+builder.Services.AddTransient<IMaterialRepository, MaterialRepository>();
 
 var app = builder.Build();
 
